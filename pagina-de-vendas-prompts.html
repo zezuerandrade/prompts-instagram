@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompts para Instagram com Claude AI — Escale suas Vendas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0A0E1A;
+    --surface:  #111827;
+    --surface2: #0D1626;
+    --border:   #1E2D40;
+    --cyan:     #00D4FF;
+    --purple:   #7C3AED;
+    --green:    #10B981;
+    --gold:     #F59E0B;
+    --red:      #EF4444;
+    --text:     #F1F5F9;
+    --muted:    #94A3B8;
+    --dim:      #475569;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID BG ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── UTILS ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .mono { font-family: 'Space Mono', monospace; }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    border-radius: 2px;
+  }
+
+  .glow-cyan  { box-shadow: 0 0 30px rgba(0,212,255,0.15); }
+  .glow-gold  { box-shadow: 0 0 30px rgba(245,158,11,0.2); }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    letter-spacing: .04em;
+    position: relative; z-index: 10;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 80px 0 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before, .hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+  .hero::before {
+    width: 500px; height: 500px;
+    background: rgba(0,212,255,0.07);
+    top: -100px; left: -150px;
+  }
+  .hero::after {
+    width: 400px; height: 400px;
+    background: rgba(124,58,237,0.08);
+    top: -50px; right: -100px;
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--cyan);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: .08em;
+    margin-bottom: 28px;
+    background: rgba(0,212,255,0.05);
+  }
+  .badge::before { content: '✦'; }
+  .badge::after  { content: '✦'; }
+
+  .hero h1 {
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 0;
+  }
+
+  .hero h1 .block-highlight {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    color: #000;
+    padding: 2px 12px;
+    border-radius: 4px;
+    margin: 6px 0;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--muted);
+    max-width: 560px;
+    margin: 22px auto 0;
+    font-weight: 400;
+  }
+
+  /* ── HERO STATS ── */
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 48px 0 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    overflow: hidden;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-stat {
+    flex: 1;
+    padding: 22px 16px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat .num {
+    font-size: 32px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 4px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { position: relative; z-index: 1; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  h2 {
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    margin-bottom: 16px;
+  }
+
+  /* ── DOR ── */
+  .dor { padding: 72px 0; }
+
+  .dor-intro {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 40px;
+  }
+
+  .dor-list {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+  }
+  .dor-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .dor-list li::before {
+    content: '×';
+    color: var(--red);
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: -1px;
+  }
+
+  .dor-turn {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.04);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .dor-turn strong { color: var(--cyan); }
+
+  /* ── O QUE É ── */
+  .oque { padding: 72px 0; border-top: 1px solid var(--border); }
+
+  .oque-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  @media(max-width:640px){ .oque-grid { grid-template-columns: 1fr; } }
+
+  .oque-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+  }
+  .oque-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-2px); }
+  .oque-card .card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    border-radius: 14px 0 0 14px;
+  }
+  .oque-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-left: 12px;
+  }
+  .oque-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 12px;
+  }
+  .oque-card .card-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+    padding-left: 12px;
+  }
+
+  /* ── MÓDULOS ── */
+  .modulos { padding: 72px 0; border-top: 1px solid var(--border); }
+
+  .modulo-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 24px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .modulo-item:hover { border-color: rgba(0,212,255,0.3); }
+
+  .modulo-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .modulo-body {
+    padding: 20px 24px 20px 0;
+  }
+  .modulo-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .modulo-body p  { font-size: 13px; color: var(--muted); }
+
+  .modulo-prompts {
+    display: none;
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    padding: 20px 24px;
+    background: var(--surface2);
+  }
+  .modulo-item.open .modulo-prompts { display: block; }
+  .modulo-item.open { border-color: rgba(0,212,255,0.35); }
+
+  .prompt-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 4px 4px 4px 0;
+  }
+  .prompt-pill::before { content: '→'; color: var(--cyan); }
+
+  .modulo-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--cyan);
+    margin-top: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+  }
+  .modulo-arrow { transition: transform .25s; }
+  .modulo-item.open .modulo-arrow { transform: rotate(180deg); }
+
+  /* ── PARA QUEM É ── */
+  .paraquem { padding: 72px 0; border-top: 1px solid var(--border); }
+
+  .paraquem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 40px;
+  }
+
+  .paraquem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 20px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+  .paraquem-card:hover { border-color: rgba(16,185,129,0.4); transform: translateY(-2px); }
+  .paraquem-card .pc-icon { font-size: 28px; margin-bottom: 10px; }
+  .paraquem-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--green); }
+  .paraquem-card p  { font-size: 12.5px; color: var(--muted); }
+
+  /* ── GARANTIA ── */
+  .garantia {
+    padding: 64px 0;
+    border-top: 1px solid var(--border);
+  }
+  .garantia-box {
+    background: var(--surface);
+    border: 1px solid rgba(16,185,129,0.4);
+    border-radius: 20px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  @media(max-width:520px){ .garantia-box { grid-template-columns: 1fr; text-align: center; } }
+  .garantia-shield {
+    width: 80px; height: 80px;
+    background: rgba(16,185,129,0.1);
+    border: 2px solid var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .garantia-box h3 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .garantia-box p  { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── ORDER BUMP ── */
+  .order-bump-section { padding: 72px 0; border-top: 1px solid var(--border); }
+
+  .bump-box {
+    border: 2px dashed var(--gold);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    background: rgba(245,158,11,0.03);
+  }
+  .bump-tag {
+    position: absolute;
+    top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: #000;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .08em;
+    padding: 4px 20px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .bump-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  @media(max-width:620px){ .bump-inner { grid-template-columns: 1fr; } }
+
+  .bump-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 3px 12px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .bump-inner h3 {
+    font-size: 24px; font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .bump-inner p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+  .bump-list {
+    list-style: none;
+    display: grid;
+    gap: 7px;
+  }
+  .bump-list li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .bump-list li::before { content: '✦'; color: var(--gold); font-size: 10px; }
+
+  .bump-price-box {
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 24px 28px;
+    min-width: 160px;
+  }
+  .bump-from {
+    font-size: 12px; color: var(--dim);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .bump-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px; font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .bump-price-note { font-size: 11px; color: var(--dim); margin-top: 6px; }
+
+  /* ── CTA PRINCIPAL ── */
+  .cta-section {
+    padding: 80px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+
+  .cta-price-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 48px;
+    margin: 36px auto;
+    gap: 4px;
+  }
+  .cta-de {
+    font-size: 14px;
+    color: var(--dim);
+    text-decoration: line-through;
+    font-family: 'Space Mono', monospace;
+  }
+  .cta-price {
+    font-size: 52px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .cta-note { font-size: 13px; color: var(--muted); }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    color: #000;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px 44px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: .01em;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 0 40px rgba(0,212,255,0.25);
+  }
+  .btn-cta:hover {
+    opacity: .92;
+    transform: translateY(-2px);
+    box-shadow: 0 0 60px rgba(0,212,255,0.35);
+  }
+  .btn-cta:active { transform: translateY(0); }
+
+  .cta-seguro {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .cta-seguro span {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--dim);
+  }
+  .cta-seguro span::before { font-size: 14px; }
+
+  /* ── FAQ ── */
+  .faq { padding: 72px 0; border-top: 1px solid var(--border); }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: var(--surface);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .faq-item:hover, .faq-item.open { border-color: rgba(0,212,255,0.3); }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    font-weight: 600;
+    font-size: 14.5px;
+    gap: 16px;
+  }
+  .faq-icon {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--cyan);
+    transition: transform .25s, background .2s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,212,255,0.1); }
+
+  .faq-a {
+    display: none;
+    padding: 0 22px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--dim);
+    position: relative; z-index: 1;
+  }
+  footer .gradient-bar { width: 100px; margin: 16px auto 0; }
+
+  /* ── STICKY CTA mobile ── */
+  .sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 14px 20px;
+    z-index: 100;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media(max-width:640px) { .sticky-cta { display: flex; } }
+  .sticky-cta p { font-size: 13px; font-weight: 600; }
+  .sticky-cta p span { color: var(--cyan); font-family: 'Space Mono', monospace; }
+  .sticky-cta a {
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    color: #000;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 40px rgba(0,212,255,0.25); }
+    50%       { box-shadow: 0 0 65px rgba(0,212,255,0.45); }
+  }
+  .btn-cta { animation: pulse-glow 2.8s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp .6s ease both; }
+  .hero .badge        { animation-delay: .1s; }
+  .hero h1            { animation-delay: .2s; }
+  .hero .hero-sub     { animation-delay: .3s; }
+  .hero .hero-stats   { animation-delay: .45s; }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    padding: 12px 0;
+    position: relative; z-index: 1;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 28s linear infinite;
+    gap: 0;
+  }
+  .ticker-item {
+    padding: 0 40px;
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 500;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    border-right: 1px solid var(--border);
+  }
+  .ticker-item span { color: var(--cyan); margin-right: 6px; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── COUNTER ── */
+  .counter-bar {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .counter-text { font-size: 14px; color: var(--muted); }
+  .counter-text strong { color: var(--text); }
+  .counter-urgency {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .dot-pulse {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: dotPulse 1.2s ease-in-out infinite;
+  }
+  @keyframes dotPulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .4; transform: scale(.7); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">⚡ OFERTA ESPECIAL — Apenas R$27,00 • Acesso imediato ao PDF completo ⚡</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">EDIÇÃO 2026</div>
+
+    <h1>
+      PROMPTS<br>
+      <span class="block-highlight">PARA INSTAGRAM</span><br>
+      <span style="font-size:.65em; font-weight:500; color:var(--muted);">com Claude AI</span>
+    </h1>
+
+    <p class="hero-sub">
+      40 prompts prontos para você copiar, colar e escalar vendas no Instagram — sem precisar entender de IA.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">40+</div>
+        <div class="lbl">Prompts prontos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">4</div>
+        <div class="lbl">Módulos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">R$27</div>
+        <div class="lbl">Acesso vitalício</div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <a href="#comprar" class="btn-cta">
+        QUERO MEU ACESSO AGORA →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item"><span>✦</span>Geração de Conteúdo</div>
+    <div class="ticker-item"><span>✦</span>Calendário Editorial</div>
+    <div class="ticker-item"><span>✦</span>Atendimento via DM</div>
+    <div class="ticker-item"><span>✦</span>Qualificação de Leads</div>
+    <div class="ticker-item"><span>✦</span>Posts que Convertem</div>
+    <div class="ticker-item"><span>✦</span>Scripts de Fechamento</div>
+    <div class="ticker-item"><span>✦</span>Carrosséis de Autoridade</div>
+    <div class="ticker-item"><span>✦</span>Roteiros de Reels</div>
+    <div class="ticker-item"><span>✦</span>Geração de Conteúdo</div>
+    <div class="ticker-item"><span>✦</span>Calendário Editorial</div>
+    <div class="ticker-item"><span>✦</span>Atendimento via DM</div>
+    <div class="ticker-item"><span>✦</span>Qualificação de Leads</div>
+    <div class="ticker-item"><span>✦</span>Posts que Convertem</div>
+    <div class="ticker-item"><span>✦</span>Scripts de Fechamento</div>
+    <div class="ticker-item"><span>✦</span>Carrosséis de Autoridade</div>
+    <div class="ticker-item"><span>✦</span>Roteiros de Reels</div>
+  </div>
+</div>
+
+<!-- DOR -->
+<section class="dor">
+  <div class="container">
+    <span class="section-label">// o problema</span>
+    <h2>Você sente que posta muito<br>e <span class="gradient-text">vende pouco?</span></h2>
+    <p class="dor-intro">
+      Não é falta de esforço. É falta do texto certo, na hora certa. Isso te soa familiar?
+    </p>
+
+    <ul class="dor-list">
+      <li>Você passa horas pensando em legenda e quando publica… zero engajamento</li>
+      <li>Não sabe como responder leads na DM sem parecer desesperado ou perder a venda</li>
+      <li>Já tentou usar o ChatGPT mas os textos saem genéricos e sem personalidade</li>
+      <li>Não tem consistência no perfil — fica dias sem postar por falta de ideias</li>
+      <li>Sente que os concorrentes crescem mais rápido mesmo fazendo "a mesma coisa"</li>
+    </ul>
+
+    <div class="dor-turn">
+      E se você pudesse <strong>abrir o Claude, colar um prompt e ter em 30 segundos</strong> o post, a legenda, o script da DM ou o calendário do mês inteiro — exatamente do jeito que converte?
+    </div>
+  </div>
+</section>
+
+<!-- O QUE É -->
+<section class="oque">
+  <div class="container">
+    <span class="section-label">// a solução</span>
+    <h2>Um guia de <span class="gradient-text">prompts cirúrgicos</span><br>feitos para vender</h2>
+    <p style="color:var(--muted); max-width:580px; margin-bottom:8px;">
+      Não é curso. Não é ebook teórico. É um arsenal de prompts prontos, organizados em 4 módulos de ação imediata.
+    </p>
+
+    <div class="oque-grid">
+      <div class="oque-card">
+        <div class="card-accent" style="background:var(--cyan);"></div>
+        <div class="card-icon">⬡</div>
+        <h3>Pronto para usar</h3>
+        <p>Copie, cole, substitua os [colchetes] e envie. Sem curva de aprendizado em IA.</p>
+      </div>
+      <div class="oque-card">
+        <div class="card-accent" style="background:var(--purple);"></div>
+        <div class="card-icon">◈</div>
+        <h3>Feito para o Instagram</h3>
+        <p>Cada prompt foi desenhado para o formato e a lógica de vendas do Instagram — não de outros canais.</p>
+      </div>
+      <div class="oque-card">
+        <div class="card-accent" style="background:var(--green);"></div>
+        <div class="card-icon">◎</div>
+        <h3>Claude AI como aliado</h3>
+        <p>O Claude gera textos em português com muito mais qualidade. Esses prompts extraem o melhor dele.</p>
+      </div>
+      <div class="oque-card">
+        <div class="card-accent" style="background:var(--gold);"></div>
+        <div class="card-icon">◆</div>
+        <h3>Resultado em minutos</h3>
+        <p>Um mês de conteúdo planejado, uma sequência de DM ou um carrossel de autoridade — em menos de 5 min.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="modulos">
+  <div class="container">
+    <span class="section-label">// o que está dentro</span>
+    <h2>4 módulos, <span class="gradient-text">40 prompts</span><br>de resultado imediato</h2>
+
+    <!-- Módulo 1 -->
+    <div class="modulo-item" onclick="toggleModulo(this)">
+      <div class="modulo-num" style="background:var(--cyan);">01</div>
+      <div class="modulo-body">
+        <h3>Geração de Conteúdo</h3>
+        <p>Posts, carrosséis, reels e legendas que param o scroll e geram vendas</p>
+        <div class="modulo-toggle">Ver prompts <span class="modulo-arrow">▾</span></div>
+      </div>
+      <div class="modulo-prompts">
+        <span class="prompt-pill">Post de Autoridade</span>
+        <span class="prompt-pill">Carrossel de Dicas</span>
+        <span class="prompt-pill">Legenda para Produto</span>
+        <span class="prompt-pill">Prova Social</span>
+        <span class="prompt-pill">Roteiro de Reels 30s</span>
+        <span class="prompt-pill">Storytelling</span>
+        <span class="prompt-pill">Sequência de Stories</span>
+        <span class="prompt-pill">Antes e Depois</span>
+        <span class="prompt-pill">Post Educativo (Fio)</span>
+        <span class="prompt-pill">10 CTAs Criativos</span>
+      </div>
+    </div>
+
+    <!-- Módulo 2 -->
+    <div class="modulo-item" onclick="toggleModulo(this)">
+      <div class="modulo-num" style="background:var(--purple);">02</div>
+      <div class="modulo-body">
+        <h3>Calendário Editorial</h3>
+        <p>Planejamento de 30 dias, temas por pilar e nunca mais ficar sem ideia</p>
+        <div class="modulo-toggle">Ver prompts <span class="modulo-arrow">▾</span></div>
+      </div>
+      <div class="modulo-prompts">
+        <span class="prompt-pill">Calendário 30 Dias</span>
+        <span class="prompt-pill">Planejamento Semanal</span>
+        <span class="prompt-pill">Ideias por Pilar</span>
+        <span class="prompt-pill">Datas Comemorativas</span>
+        <span class="prompt-pill">Repurposing 1→5</span>
+        <span class="prompt-pill">Hashtags Estratégicas</span>
+        <span class="prompt-pill">Bio de Conversão</span>
+        <span class="prompt-pill">Aquecimento de Lançamento</span>
+        <span class="prompt-pill">Mapa de Funil</span>
+        <span class="prompt-pill">Legenda Promocional</span>
+      </div>
+    </div>
+
+    <!-- Módulo 3 -->
+    <div class="modulo-item" onclick="toggleModulo(this)">
+      <div class="modulo-num" style="background:var(--green);">03</div>
+      <div class="modulo-body">
+        <h3>Atendimento via DM</h3>
+        <p>Scripts para converter leads, tratar objeções e fechar sem pressão</p>
+        <div class="modulo-toggle">Ver prompts <span class="modulo-arrow">▾</span></div>
+      </div>
+      <div class="modulo-prompts">
+        <span class="prompt-pill">Resposta ao Pedido de Preço</span>
+        <span class="prompt-pill">Objeção "Tá Caro"</span>
+        <span class="prompt-pill">Follow-up Pós-Orçamento</span>
+        <span class="prompt-pill">Comentário Negativo</span>
+        <span class="prompt-pill">Atendimento Inicial DM</span>
+        <span class="prompt-pill">"Vou Pensar"</span>
+        <span class="prompt-pill">Reativação de Lead Frio</span>
+        <span class="prompt-pill">FAQ Respondido</span>
+        <span class="prompt-pill">Pós-Venda e Fidelização</span>
+        <span class="prompt-pill">Script de Fechamento DM</span>
+      </div>
+    </div>
+
+    <!-- Módulo 4 -->
+    <div class="modulo-item" onclick="toggleModulo(this)">
+      <div class="modulo-num" style="background:var(--gold);">04</div>
+      <div class="modulo-body">
+        <h3>Qualificação de Leads</h3>
+        <p>Capture, nutra e identifique quem está pronto para comprar agora</p>
+        <div class="modulo-toggle">Ver prompts <span class="modulo-arrow">▾</span></div>
+      </div>
+      <div class="modulo-prompts">
+        <span class="prompt-pill">5 Perguntas de Qualificação</span>
+        <span class="prompt-pill">Nutrição 5 Dias</span>
+        <span class="prompt-pill">Sinais de Lead Quente</span>
+        <span class="prompt-pill">Isca Digital</span>
+        <span class="prompt-pill">Story com CTA para Lista</span>
+        <span class="prompt-pill">Pedido de Indicação</span>
+        <span class="prompt-pill">Segmentação de Lista</span>
+        <span class="prompt-pill">Nutrição de Lead Frio</span>
+        <span class="prompt-pill">Campanha de Urgência</span>
+        <span class="prompt-pill">Pitch em 1 Mensagem</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="paraquem">
+  <div class="container">
+    <span class="section-label">// para quem é</span>
+    <h2>Este guia foi feito<br><span class="gradient-text">para você que...</span></h2>
+
+    <div class="paraquem-grid">
+      <div class="paraquem-card">
+        <div class="pc-icon">🎯</div>
+        <h4>Vende serviços</h4>
+        <p>Coach, consultor, designer, terapeuta — qualquer serviço que precise de autoridade e relacionamento</p>
+      </div>
+      <div class="paraquem-card">
+        <div class="pc-icon">🛍️</div>
+        <h4>Tem loja ou produto</h4>
+        <p>E-commerce, dropshipping, produtos físicos ou digitais que precisam de conteúdo constante</p>
+      </div>
+      <div class="paraquem-card">
+        <div class="pc-icon">📱</div>
+        <h4>Quer crescer no Instagram</h4>
+        <p>Iniciante ou quem já posta mas não converte — o guia funciona em qualquer estágio</p>
+      </div>
+      <div class="paraquem-card">
+        <div class="pc-icon">⚡</div>
+        <h4>Quer resultado rápido</h4>
+        <p>Sem curso de 20 horas. Abre, copia o prompt, personaliza e publica em minutos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="garantia">
+  <div class="container">
+    <div class="garantia-box">
+      <div class="garantia-shield">🛡️</div>
+      <div>
+        <h3>Garantia incondicional de 7 dias</h3>
+        <p>
+          Se você comprar, testar os prompts e sentir que não valeu cada centavo dos R$27 — é só pedir o reembolso. Sem perguntas, sem burocracia, sem enrolação. O risco é todo nosso, não seu.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER BUMP -->
+<section class="order-bump-section">
+  <div class="container">
+    <div class="bump-box">
+      <div class="bump-tag">⚡ OFERTA ESPECIAL — Adicione ao seu pedido</div>
+      <div class="bump-inner">
+        <div>
+          <div class="bump-badge">VAULT DE PROMPTS AVANÇADOS</div>
+          <h3>Mais 50 Prompts Premium<br>de Conversão</h3>
+          <p>
+            Enquanto o guia principal cobre o dia a dia, o Vault vai direto para onde está o dinheiro: scripts de fechamento, storytelling avançado, reativação de leads frios e muito mais.
+          </p>
+          <ul class="bump-list">
+            <li>10 prompts de Storytelling que Vendem</li>
+            <li>10 Scripts de Fechamento e Ancoragem de Preço</li>
+            <li>10 prompts de Reativação de Leads Frios</li>
+            <li>10 prompts de Autoridade e Posicionamento</li>
+            <li>10 prompts de Indicação e Escala</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bump-price-box">
+            <div class="bump-from">R$47</div>
+            <div class="bump-price">R$17</div>
+            <div class="bump-price-note">uma única vez</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PRINCIPAL -->
+<section class="cta-section" id="comprar">
+  <div class="container">
+    <span class="section-label">// agora é sua vez</span>
+    <h2>Pare de adivinhar o que<br><span class="gradient-text">funciona no Instagram</span></h2>
+    <p style="color:var(--muted); max-width:500px; margin:0 auto; font-size:16px;">
+      40 prompts testados para conteúdo, calendário, atendimento e leads. Acesso imediato ao PDF após a compra.
+    </p>
+
+    <div class="cta-price-wrapper">
+      <div class="cta-de">de R$97</div>
+      <div class="cta-price">R$ 27,00</div>
+      <div class="cta-note">pagamento único • acesso vitalício ao PDF</div>
+    </div>
+
+    <a href="#" class="btn-cta">
+      QUERO OS 40 PROMPTS AGORA →
+    </a>
+
+    <div class="cta-seguro">
+      <span><span style="color:var(--green)">🔒</span>&nbsp;Pagamento seguro</span>
+      <span><span style="color:var(--cyan)">⚡</span>&nbsp;Entrega imediata</span>
+      <span><span style="color:var(--gold)">🛡️</span>&nbsp;Garantia de 7 dias</span>
+    </div>
+
+    <div class="counter-bar">
+      <div class="counter-text"><strong>Oferta por tempo limitado.</strong> O preço pode aumentar sem aviso.</div>
+      <div class="counter-urgency">
+        <div class="dot-pulse"></div>
+        OFERTA ATIVA
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <span class="section-label">// dúvidas frequentes</span>
+    <h2>Perguntas <span class="gradient-text">frequentes</span></h2>
+
+    <div style="margin-top:32px;">
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Preciso saber usar IA para aproveitar os prompts? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Não. Basta ter uma conta gratuita no Claude (claude.ai), copiar o prompt, substituir os campos em [colchetes] pelo seu nicho ou produto, e enviar. O guia tem uma página explicando exatamente como fazer isso em menos de 2 minutos.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">O Claude AI é pago? Preciso assinar algo? <span class="faq-icon">+</span></div>
+        <div class="faq-a">O Claude tem um plano gratuito que já permite usar todos os prompts deste guia. Você não precisa pagar nada além dos R$27 do guia para começar a usar imediatamente.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Como recebo o PDF após a compra? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Assim que o pagamento é confirmado, você recebe o link de download direto no e-mail cadastrado. O acesso é imediato e o arquivo fica disponível para baixar quando quiser.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Funciona para qualquer nicho? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Sim. Todos os prompts têm campos personalizáveis para você inserir seu nicho, produto e tom de voz. O guia funciona para coaches, consultores, e-commerce, prestadores de serviço, infoprodutores — qualquer profissional que venda pelo Instagram.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">O que é o Vault de Prompts Avançados? Vale a pena? <span class="faq-icon">+</span></div>
+        <div class="faq-a">O Vault é um produto complementar com 50 prompts focados em conversão: storytelling avançado, scripts de fechamento, reativação de leads frios e estratégias de escala. Enquanto o guia principal cobre o dia a dia, o Vault vai direto para as situações de venda. Por R$17 adicionais, é o investimento mais fácil que você vai fazer.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">E se eu não gostar? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Você tem 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, basta enviar um e-mail e devolvemos 100% do valor, sem perguntas e sem burocracia.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Prompts para Instagram com Claude AI · Todos os direitos reservados</p>
+  <div class="gradient-bar"></div>
+</footer>
+
+<!-- STICKY CTA mobile -->
+<div class="sticky-cta">
+  <p>Apenas <span>R$27</span> · PDF imediato</p>
+  <a href="#comprar">COMPRAR AGORA</a>
+</div>
+
+<script>
+  function toggleModulo(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.modulo-item').forEach(m => m.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+
+  // Intersection observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.oque-card, .paraquem-card, .modulo-item, .faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease, border-color .2s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
