@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compra Confirmada — Prompts para Instagram com Claude AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel — Evento Purchase -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2737263389988910');
+fbq('track', 'PageView');
+fbq('track', 'Purchase', {
+  value: 27.00,
+  currency: 'BRL',
+  content_name: 'Prompts para Instagram com Claude AI',
+  content_type: 'product'
+});
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2737263389988910&ev=Purchase&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel -->
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:     #0A0E1A;
+    --surf:   #111827;
+    --surf2:  #0D1626;
+    --border: #1E2D40;
+    --cyan:   #00D4FF;
+    --purple: #7C3AED;
+    --green:  #10B981;
+    --gold:   #F59E0B;
+    --text:   #F1F5F9;
+    --muted:  #94A3B8;
+    --dim:    #475569;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    z-index: 10;
+  }
+  .bottombar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    z-index: 10;
+  }
+
+  .container {
+    max-width: 640px;
+    width: 100%;
+    padding: 40px 24px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  /* Glow verde de sucesso */
+  .glow-success {
+    position: fixed;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Ícone de check animado */
+  .check-wrap {
+    width: 100px; height: 100px;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+  .check-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--green);
+    background: rgba(16,185,129,0.08);
+    display: flex; align-items: center; justify-content: center;
+    animation: popIn .5s ease both;
+  }
+  .check-circle svg {
+    width: 48px; height: 48px;
+    stroke: var(--green);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawCheck .4s ease .4s forwards;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Confete pulse */
+  .check-wrap::after {
+    content: '';
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(16,185,129,0.2);
+    animation: pulse 2s ease-in-out 1s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity: .5; }
+    50%      { transform: scale(1.15); opacity: 0; }
+  }
+
+  /* Título */
+  .title-tag {
+    display: inline-block;
+    border: 1px solid var(--green);
+    border-radius: 100px;
+    padding: 5px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+    background: rgba(16,185,129,0.06);
+  }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  h1 span {
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  /* Card principal */
+  .card-main {
+    background: var(--surf);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .card-main h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-main h2::before {
+    content: '';
+    width: 4px; height: 20px;
+    background: linear-gradient(var(--cyan), var(--purple));
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .steps {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+  }
+  .steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-top: 1px;
+  }
+  .steps li strong { color: var(--text); }
+
+  /* Card bônus Vault */
+  .card-vault {
+    background: rgba(245,158,11,0.04);
+    border: 1px dashed var(--gold);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+  }
+  .vault-tag {
+    position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 3px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .card-vault h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .card-vault p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Separador */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 8px 0 20px;
+  }
+
+  /* Info compra */
+  .purchase-info {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .purchase-info span {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    color: var(--dim);
+  }
+  .purchase-info span strong { color: var(--muted); }
+
+  /* Footer */
+  footer {
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 32px;
+    line-height: 1.8;
+  }
+  footer a { color: var(--dim); text-decoration: underline; }
+
+  /* Fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .container > * {
+    animation: fadeUp .5s ease both;
+  }
+  .container > *:nth-child(1) { animation-delay: .1s; }
+  .container > *:nth-child(2) { animation-delay: .15s; }
+  .container > *:nth-child(3) { animation-delay: .2s; }
+  .container > *:nth-child(4) { animation-delay: .25s; }
+  .container > *:nth-child(5) { animation-delay: .3s; }
+  .container > *:nth-child(6) { animation-delay: .35s; }
+  .container > *:nth-child(7) { animation-delay: .4s; }
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+<div class="bottombar"></div>
+<div class="glow-success"></div>
+
+<div class="container">
+
+  <!-- Check animado -->
+  <div class="check-wrap">
+    <div class="check-circle">
+      <svg viewBox="0 0 48 48">
+        <polyline points="10,24 20,34 38,16"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Tag -->
+  <div class="title-tag">✦ COMPRA CONFIRMADA ✦</div>
+
+  <!-- Título -->
+  <h1>Seu acesso está<br><span>pronto!</span></h1>
+
+  <p class="subtitle">
+    Obrigado pela sua compra! Em alguns instantes você receberá<br>
+    um e-mail com o link para acessar seus prompts.
+  </p>
+
+  <!-- Próximos passos -->
+  <div class="card-main">
+    <h2>Como acessar seu material</h2>
+    <ul class="steps">
+      <li>
+        <div class="step-num">01</div>
+        <div><strong>Verifique seu e-mail</strong> — a Kiwify enviará automaticamente o link de acesso à área de membros para o e-mail que você usou na compra.</div>
+      </li>
+      <li>
+        <div class="step-num">02</div>
+        <div><strong>Acesse a área de membros</strong> — crie sua senha e faça login. Você encontrará o PDF completo disponível para download.</div>
+      </li>
+      <li>
+        <div class="step-num">03</div>
+        <div><strong>Abra o Claude AI</strong> — acesse claude.ai e crie sua conta gratuita caso ainda não tenha.</div>
+      </li>
+      <li>
+        <div class="step-num">04</div>
+        <div><strong>Copie o primeiro prompt</strong> — substitua os campos em [colchetes] pelo seu nicho e envie. Seus primeiros resultados chegam em menos de 60 segundos.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Vault se comprou -->
+  <div class="card-vault">
+    <div class="vault-tag">⚡ SE VOCÊ ADICIONOU O VAULT</div>
+    <h3>Vault de Prompts Avançados</h3>
+    <p>Seus 50 prompts premium de conversão também estão na área de membros — em uma seção separada. Acesse após baixar o guia principal.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Info da compra -->
+  <div class="purchase-info">
+    <span>🔒 <strong>Pagamento seguro</strong></span>
+    <span>⚡ <strong>Acesso imediato</strong></span>
+    <span>🛡️ <strong>Garantia 7 dias</strong></span>
+    <span>♾️ <strong>Acesso vitalício</strong></span>
+  </div>
+
+  <footer>
+    <p>Dúvidas? Entre em contato pelo e-mail de suporte informado na Kiwify.</p>
+    <p style="margin-top:6px;">© 2026 Prompts para Instagram com Claude AI · Todos os direitos reservados</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
